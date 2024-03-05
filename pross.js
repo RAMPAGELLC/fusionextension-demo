@@ -1,4 +1,3 @@
-/* Alexa Traffic Uzantısı */
 const { remote } = require('electron');
 const {
     BrowserWindow,
@@ -13,7 +12,6 @@ const { join } = require('path');
 const manifest = require('./manifest.json');
 var extensionBar = document.getElementById('extensionsMod');
 
-/* Eklentiler Üst Menüye Ekle */
 if (document.getElementById(manifest.idkey)) {
     document.getElementById(manifest.idkey).addEventListener('click', async () => {
         launchExtension();
@@ -36,13 +34,11 @@ async function launchExtension() {
         frame: false,
         transparent: true,
         resizable: false,
-        //skipTaskbar: true,
         width: 300,
         height: 400,
         x: Math.ceil(document.getElementById(manifest.idkey).getBoundingClientRect().left + window.screenX) - 280,
         y: Math.ceil(document.getElementById(manifest.idkey).getBoundingClientRect().top + window.screenY
             + parseFloat(getComputedStyle(document.getElementById(manifest.idkey), null).height.replace("px", ""))),
-        //alwaysOnTop: true,
         parent: remote.getCurrentWindow(),
         webPreferences: {
             nodeIntegration: true,
@@ -51,7 +47,7 @@ async function launchExtension() {
         }
     });
 
-    let create_loadModalVPN = require('url').format({
+    let createExtensionModal = require('url').format({
         pathname: join(__dirname, 'index.html'),
         protocol: 'file:',
         slashes: true
@@ -65,5 +61,5 @@ async function launchExtension() {
         extensionWindow.close();
     });
 
-    extensionWindow.loadURL(create_loadModalVPN);
+    extensionWindow.loadURL(createExtensionModal);
 }
